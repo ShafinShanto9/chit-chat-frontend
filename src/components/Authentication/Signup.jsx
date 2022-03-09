@@ -86,6 +86,7 @@ function Signup() {
             isClosable: true,
             position: "bottom",
           });
+          setLoading(false);
           return;
         }
     console.log(name, email, password, pic);
@@ -118,7 +119,7 @@ function Signup() {
       navigate("/chats");
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: "User Already Register",
         description: error.response.data.message,
         status: "error",
         duration: 5000,

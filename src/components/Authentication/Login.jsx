@@ -55,7 +55,7 @@ function Login() {
       navigate("/chats");
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: "Email Password Didnt Match",
         description: error.response.data.message,
         status: "error",
         duration: 5000,

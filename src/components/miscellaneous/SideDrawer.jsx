@@ -4,6 +4,9 @@ import React, { useState } from 'react'
 import { BsSearch, BsChatDots } from 'react-icons/bs'
 import { MdOutlineSentimentSatisfied } from 'react-icons/md'
 import { ChatState } from '../../Context/ChatProvider'
+import ProfileModel from './ProfileModal'
+import { useNavigate } from 'react-router-dom'
+
 
 
 const SideDrawer = () => {
@@ -11,8 +14,14 @@ const SideDrawer = () => {
   const [searchResult, setSearchResult] = useState([])
   const [loading, setLoading] = useState(false)
   const [loadingChat, setLoadingChat] = useState()
+  const navigate = useNavigate()
 
-  const {user} = ChatState()
+  const { user } = ChatState()
+  
+  const logOutHandler = () => {
+    localStorage.removeItem('userInfo')
+    navigate('/')
+  }
 
   return (
     <>
@@ -56,9 +65,11 @@ const SideDrawer = () => {
               <Avatar size='sm' cursor='pointer' name={user.name} src={ user.pic}/>
             </MenuButton>
             <MenuList bg="#292929">
-              <MenuItem>MyProfile</MenuItem>
+              <ProfileModel user={user}>
+                <MenuItem>MyProfile</MenuItem>
+              </ProfileModel>
               <MenuDivider/>
-              <MenuItem>LogOut</MenuItem>
+              <MenuItem onClick={logOutHandler}>LogOut</MenuItem>
             </MenuList>
           </Menu>
 
